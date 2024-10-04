@@ -13,16 +13,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-          
+  
       # Setup key
       - name: Install SSH key
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
           echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
           echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-
-          
+     
       # Build
       - name: Install dependencies
         run: npm ci
