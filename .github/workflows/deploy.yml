@@ -27,5 +27,5 @@ jobs:
         run: npm run build
       # Deploy
       - name: Run a one-line script
-        # run: echo Hello, world!
-        run: rsync --archive --stats dist/ ${{ secrets.REMOTE_DEST }}
+        run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . {{ secrets.REMOTE_DEST }}
+        working-directory: ./dist
