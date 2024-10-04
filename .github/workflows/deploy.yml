@@ -18,7 +18,7 @@ jobs:
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
           echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
-          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts   
+          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
       # Build
       - name: Install dependencies
         run: npm ci
