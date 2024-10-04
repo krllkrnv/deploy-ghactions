@@ -30,6 +30,6 @@ jobs:
         run: npm run build
       # Deploy
       - name: Run a one-line script
-        run: rsync --archive --stats --archive --compress --delete dist/ ${{ secrets.REMOTE_DEST }}
-        # run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . {{ secrets.REMOTE_DEST }}
+        # run: rsync --archive --stats --archive --compress --delete dist/ ${{ secrets.REMOTE_DEST }}
+        run: rsync -e "ssh -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no" --archive --compress --delete . ${{ secrets.REMOTE_DEST }}
         working-directory: ./dist
