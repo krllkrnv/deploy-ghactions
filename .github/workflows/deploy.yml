@@ -19,7 +19,7 @@ jobs:
       - name: Install SSH key
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
-          echo "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
           echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
 
           
@@ -30,5 +30,6 @@ jobs:
         run: npm run build
       # Deploy
       - name: Run a one-line script
-        run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . {{ secrets.REMOTE_DEST }}
+        run: rsync --archive --stats --archive --compress --delete dist/ ${{ secrets.REMOTE_DEST }}
+        # run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . {{ secrets.REMOTE_DEST }}
         working-directory: ./dist
