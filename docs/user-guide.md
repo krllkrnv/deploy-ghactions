@@ -7,11 +7,11 @@
 Пример:
 ```yaml
 nav:
-  - Главная: index.md
-  - Быстрый старт: getting-started.md
-  - Руководство пользователя: user-guide.md
-  - Руководство разработчика: developer-guide.md
-  - О проекте: about.md
+    - Главная: index.md
+    - Быстрый старт: getting-started.md
+    - Руководство пользователя: user-guide.md
+    - Руководство разработчика: developer-guide.md
+    - О проекте: about.md
 ```
 
 ## Markdown основы
