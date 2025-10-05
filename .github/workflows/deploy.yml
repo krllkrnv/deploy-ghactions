@@ -23,7 +23,7 @@ jobs:
       - name: Install Node deps
         run: npm ci
       - name: Install Python deps
-        run: pip install mkdocs
+        run: pip install -r requirements.txt
       - name: Build CSS (PostCSS)
         run: npm run styles:docs
       - name: Build MkDocs site
