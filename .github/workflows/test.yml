@@ -13,10 +13,11 @@ jobs:
       matrix:
         node-version: [22.x]
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       - run: npm ci
       - run: npm test
 
@@ -44,16 +45,10 @@ jobs:
         run: mkdocs build --strict
       - name: Minify HTML in site/
         run: npm run site:minify
-      - name: Setup Java for HTML validation
-        uses: actions/setup-java@v4
+      - name: Validate HTML with HTML5 Validator
+        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
         with:
-          distribution: 'temurin'
-          java-version: '17'
-      - name: Install HTML Checker
-        run: npm install vnu-jar
-
-      - name: Validate HTML with Nu HTML Checker
-        run: npx vnu-jar --skip-non-html --errors-only site
+          root: site/
       - name: Upload site artifact
         uses: actions/upload-artifact@v4
         with:
