@@ -1,7 +1,16 @@
 # О проекте
 
-Цель: показать сборку статического сайта на MkDocs с собственной темой, PostCSS и CI/CD (GitHub Actions + GitHub Pages).
+Цель: продемонстрировать разработку собственной темы для MkDocs и полный конвейер сборки/валидации/деплоя на GitHub Pages.
 
-Полезные ссылки:
-- Репозиторий проекта
-- Документация MkDocs: https://www.mkdocs.org/
+Стек:
+- MkDocs (собственная тема через `custom_theme/`)
+- PostCSS (`postcss-import`, `postcss-csso`)
+- GitHub Actions: сборка, минификация, строгая HTML‑валидация (Nu HTML Checker)
+- GitHub Pages (ветка `gh-pages`)
+
+Ссылки:
+- Сайт: страница GitHub Pages репозитория
+- Репозиторий: текущий проект
+
+Как внести изменения:
+- Ветки → PR → проверки в `test.yml` → деплой `deploy.yml`.

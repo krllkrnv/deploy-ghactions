@@ -1,6 +1,7 @@
 site_name: Статический сайт на MkDocs
 site_url: https://krllkrnv.github.io/mkdocs-test
 site_description: Демонстрация развертывания статического сайта
+site_author: Kirill Korneev
 
 theme:
   name: null
