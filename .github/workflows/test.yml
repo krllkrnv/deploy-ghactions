@@ -44,8 +44,13 @@ jobs:
         run: mkdocs build --strict
       - name: Minify HTML in site/
         run: npm run site:minify
-      - name: Validate HTML with Nu HTML Checker (Docker)
-        run: docker run --rm -v "$PWD/site":/site validator/validator:latest --skip-non-html --errors-only /site
+      - name: Setup Java for HTML validation
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Validate HTML with Nu HTML Checker (npx vnu-jar)
+        run: npx --yes vnu-jar --skip-non-html --errors-only site
       - name: Upload site artifact
         uses: actions/upload-artifact@v4
         with:
