@@ -1,16 +1,13 @@
 /* Page */
 
-.page,
-.page__body {
+html,
+body {
     height: 100%;
 }
 
-.page {
-    background-color: var(--beige);
-}
-
-.page__body {
+body {
     margin: 0;
+    background-color: var(--beige);
     display: grid;
     place-items: center;
 }
@@ -28,6 +25,15 @@ header .container {
 .site-logo {
     text-decoration: none;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.site-logo img {
+    height: 28px;
+    width: auto;
+    flex-shrink: 0;
+    display: block;
 }
 nav ul { list-style: none; display: flex; gap: 12px; margin: 0; padding: 0; }
 nav a { text-decoration: none; }
