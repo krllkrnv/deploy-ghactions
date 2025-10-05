@@ -17,6 +17,9 @@ nav:
 plugins:
   - search
 
+markdown_extensions:
+  - md_in_html
+
 extra_css:
   - assets/styles/index.css
 extra_javascript: []
