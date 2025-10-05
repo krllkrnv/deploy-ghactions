@@ -3,9 +3,9 @@
 Цель: продемонстрировать разработку собственной темы для MkDocs и полный конвейер сборки/валидации/деплоя на GitHub Pages.
 
 Стек:
--   MkDocs (собственная тема через `custom_theme/`)
+-   MkDocs (кастомная тема: header/nav/logo, контейнеры, footer)
 -   PostCSS (`postcss-import`, `postcss-csso`)
--   GitHub Actions: сборка, минификация, строгая HTML‑валидация (Nu HTML Checker)
+-   GitHub Actions: сборка, минификация, строгая HTML‑валидация (html5validator action)
 -   GitHub Pages (ветка `gh-pages`)
 
 Ссылки:

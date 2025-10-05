@@ -23,11 +23,11 @@
 
 ## Структура проекта
 -   `docs/` — Markdown‑страницы и ассеты сайта.
--   `custom_theme/` — Jinja2‑шаблон темы (`main.html`, header/footer/nav/meta).
+-   `custom_theme/` — Jinja2‑шаблон темы (`main.html`, header/nav/logo, footer, контейнеры).
 -   `src/styles/` — исходники CSS; сборка PostCSS → `docs/assets/styles/index.css`.
 -   `mkdocs.yml` — конфиг сайта: тема, навигация, extra_css, метаданные.
 -   `.github/workflows/` — CI для сборки/валидации и деплоя.
 
 ## CI/CD (кратко)
--   Test: сборка CSS → MkDocs → минификация → строгая HTML‑валидация → артефакт `site/`.
+-   Test: сборка CSS → MkDocs → минификация → строгая HTML‑валидация (GitHub Action html5validator) → артефакт `site/`.
 -   Deploy: сборка и публикация `site/` в `gh-pages` (GitHub Pages).

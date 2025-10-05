@@ -13,7 +13,7 @@
     <body>
         <header>
             <div class="container">
-                <a href="{{ base_url | url }}" class="site-logo">
+                <a href="{{ (nav.homepage and nav.homepage.url) | default('.') | url }}" class="site-logo">
                     <img src="{{ 'assets/images/itmo.png' | url }}" alt="Logo">
                     <span>{{ config.site_name }}</span>
                 </a>
@@ -34,12 +34,14 @@
         </header>
 
         <main>
-            {{ page.content }}
+            <div class="container">
+                {{ page.content }}
+            </div>
         </main>
 
         <footer>
             <div class="container">
-                <p>© {{ (config.copyright or config.site_name) }}</p>
+                <p>Сделано <a href="https://github.com/krllkrnv" rel="noopener" target="_blank">krllkrnv</a></p>
             </div>
         </footer>
 
