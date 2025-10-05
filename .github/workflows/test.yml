@@ -19,3 +19,48 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm test
+
+  build-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+      - name: Install Node deps
+        run: npm ci
+      - name: Install Python deps
+        run: pip install mkdocs
+      - name: Build CSS (PostCSS)
+        run: npm run styles:docs
+      - name: Build MkDocs site
+        run: mkdocs build --strict
+      - name: Minify HTML in site/
+        run: npm run site:minify
+      - name: Setup Java for HTML validation
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Download Nu HTML Checker (vnu)
+        run: |
+          curl -sSL https://github.com/validator/validator/releases/download/latest/vnu.jar_ --location -o vnu.zip || true
+          if [ ! -s vnu.zip ]; then
+            LATEST=$(curl -sSL https://api.github.com/repos/validator/validator/releases/latest | grep browser_download_url | grep vnu.jar_ | cut -d '"' -f4)
+            curl -sSL "$LATEST" -o vnu.zip
+          fi
+          unzip -q vnu.zip -d vnu
+      - name: Validate HTML with Nu HTML Checker
+        run: java -jar vnu/dist/vnu.jar --skip-non-html --errors-only site
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: site

@@ -5,6 +5,8 @@
     "test": "editorconfig-checker",
     "html": "html-minifier --remove-comments --collapse-whitespace --input-dir src --output-dir dist --file-ext html",
     "styles": "postcss src/styles/index.css --use postcss-import --use postcss-csso --no-map --output dist/styles/index.css",
+    "styles:docs": "postcss src/styles/index.css --use postcss-import --use postcss-csso --no-map --output docs/assets/styles/index.css",
+    "site:minify": "html-minifier --remove-comments --collapse-whitespace --input-dir site --output-dir site --file-ext html",
     "build": "npm run html && npm run styles",
     "serve": "serve"
   },

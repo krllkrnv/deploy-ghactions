@@ -10,22 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      # Setup key
-      - name: Install SSH key
-        run: |
-          install -m 600 -D /dev/null ~/.ssh/id_rsa
-          echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
-          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-      # Build
-      - name: Install dependencies
+          cache: 'npm'
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+      - name: Install Node deps
         run: npm ci
-      - name: Build
-        run: npm run build
-      # Deploy
-      - name: Run a one-line script
-        # run: rsync --archive --stats --archive --compress --delete dist/ ${{ secrets.REMOTE_DEST }}
-        run: rsync -e "ssh -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no" --archive --compress --delete . ${{ secrets.REMOTE_DEST }}
-        working-directory: ./dist
+      - name: Install Python deps
+        run: pip install mkdocs
+      - name: Build CSS (PostCSS)
+        run: npm run styles:docs
+      - name: Build MkDocs site
+        run: mkdocs build --strict
+      - name: Minify HTML in site/
+        run: npm run site:minify
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site

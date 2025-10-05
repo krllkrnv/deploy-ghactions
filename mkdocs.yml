@@ -1,0 +1,21 @@
+site_name: Статический сайт на MkDocs
+site_url: https://krllkrnv.github.io/mkdocs-test
+site_description: Демонстрация развертывания статического сайта
+
+theme:
+  name: null
+  custom_dir: custom_theme
+
+nav:
+  - Главная: index.md
+  - Быстрый старт: getting-started.md
+  - Руководство пользователя: user-guide.md
+  - Руководство разработчика: developer-guide.md
+  - О проекте: about.md
+
+plugins:
+  - search
+
+extra_css:
+  - assets/styles/index.css
+extra_javascript: []
